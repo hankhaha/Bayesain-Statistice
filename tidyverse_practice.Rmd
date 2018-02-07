@@ -1,0 +1,38 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+
+
+```{r}
+library(dplyr)
+
+# filter() picks cases based on their value 
+starwars %>% 
+  filter(species == "Droid")
+  
+```
+
+```{r}
+# pick variables based on their names
+starwars %>% 
+  select(name, ends_with("color"))
+```
+```{r}
+#mutate() function as add new variables that are functions of existing variables
+
+starwars %>%
+  mutate(name, bmi=mass/height) %>%
+  select(name:mass,bmi)%>%
+  arrange(desc(mass))
+```
+```{r}
+starwars%>%
+  group_by(species,gender)%>%
+  summarise(n= n(), mass=mean(mass, na.rm = TRUE)) %>% # count the number of obs within a group
+  filter(n>2)
+  
+
+```
+
